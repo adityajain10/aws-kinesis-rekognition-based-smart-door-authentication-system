@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Visitor Information WebPage 1</title>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="apigClient.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
+    <!-- <script type="text/javascript" src="WebPage_Vistor_Info.js"></script> -->
+    <script type="text/javascript">
+        function sendMessageToApi() {
+            alert("Inside sendMessageToApi");
+            var visitor = document.getElementById('visitor-name').value.trim().toLowerCase();
+            alert(visitor)
+            var phone = document.getElementById('phone-number').value.trim().toLowerCase();
+            alert(phone)
+            var link = window.location.href;
+            alert(link)
+            var faceid;
+            var fileName;
+            if (link) {
+                console.log(link)
+                link = link.split('?')[1];
+                var arr = link.split('&');
+                for (var i = 0; i < arr.length; i++) {
+                    var a = arr[i].split('=');
+                    if (a[0] == "faceId") {
+                        faceid = a[1];
+                    }
+                    if (a[0] == "fileName") {
+                        s3key = a[1];
+                    }
+                }
+            }
+            alert(" Here " + faceid)
+            //alert(" Here 2 " + fileName)
+            alert("here 2" + s3key)
+            alert('before calling function');
+            apigClient = apigClientFactory.newClient();
+
+            var params = {};
+            var body = {
+
+                "name": visitor,
+                "phone": phone,
+                //"faceId" : faceId,
+                "faceId": faceid,
+                //"fileName" : fileName
+                "fileName": s3key
+            };
+
+            var additionalParams = {};
+
+            apigClient.visitorInformationPost(params, body, additionalParams)
+                .then(function (result) {
+                    alert(result);
+                    console.log(result);
+                }).catch(function (result) {
+                //This is where you would put an error callback
+                console.log("Error: ", result);
+            });
+            // receiveMessageFromApi(visitor, phone, faceid, s3key);
+            alert('after calling function');
+            //   return false;
+            // }
+
+        }
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+<h2 align="center">Visitor Information WebPage 1</h2>
+
+<form align="center">
+    Name of Visitor:<br>
+    <input id="visitor-name" type="text">
+    <br>
+    Phone Number:<br>
+    <input id="phone-number" type="text">
+    <br><br>
+    <button id="user-input-button" onclick="sendMessageToApi()"> SUBMIT</button>
+    <p>if you click the submit button visitor will be given the access to door</p>
+
+</form>
+
+
+</body>
+</html>
