@@ -4,7 +4,8 @@ A Smart Door authentication system that uses Kinesis Video Streams and Amazon Re
 
 ## Requirements
 1. For a given visitor, your system should be able to depict their face and email you to allow or deny them access.
-2. If allowed access, you should be able to capture their information through a hosted web page. You should then send them an SMS message with a valid OTP that is only valid for a maximum of 5 minutes.
+2. If allowed access, you should be able to capture their information through a hosted web page. 
+   You should then send them an SMS message with a valid OTP that is only valid for a maximum of 5 minutes.
 3. The OTP should be valid only once and guaranteed unique across the different
 visitors.
 4. For a returning visitor (ex. the same TA), your system should automatically send
@@ -27,13 +28,13 @@ visitors, as well as adds them to the database for future training.
 ## Steps
 ### Visitor Vault
 
-    a. Create a S3 bucket (B1) to store the photos of the visitors.
+a. Create a S3 bucket (B1) to store the photos of the visitors.
 
-    b. Create a DynamoDB table “passcodes” (DB1) that stores temporary access codes to your virtual door and a reference to the visitor it was assigned to.
+b. Create a DynamoDB table “passcodes” (DB1) that stores temporary access codes to your virtual door and a reference to the visitor it was assigned to.
 
-        i. Use the TTL feature of DynamoDB to expire the records after 5 minutes.
+    i. Use the TTL feature of DynamoDB to expire the records after 5 minutes.
 
-    c. Create a DynamoDB table “visitors” (DB2) that stores details about the visitors that your Smart Door system is interacting with.
+c. Create a DynamoDB table “visitors” (DB2) that stores details about the visitors that your Smart Door system is interacting with.
 
         i. Index each visitor by the FaceId detected by Amazon Rekognition, alongside the name of the visitor and their phone number. When storing a new face, if the FaceId returned by Rekognition already exists in the database, append the new photo to the existing photos array. 
         
@@ -55,15 +56,11 @@ visitors, as well as adds them to the database for future training.
 
 ### Analyze
 
-    a. Create a Kinesis Video Stream (KVS1), that will be used to capture and 3
-    stream video for analysis. You can use the built-in video recording feature
-    in the Kinesis console to simulate a real streaming video camera.
+a. Create a Kinesis Video Stream (KVS1), that will be used to capture and stream video for analysis. You can use the built-in video recording feature in the Kinesis console to simulate a real streaming video camera.
 
-    b. Subscribe Rekognition Video to the Kinesis Video Stream (KVS1). 4
+b. Subscribe Rekognition Video to the Kinesis Video Stream (KVS1). 4
 
-    c. Output the Rekognition Video analysis to a Kinesis Data Stream (KDS1)
-    and trigger a Lambda function (LF1) for every event that Rekognition
-    Video outputs.
+c. Output the Rekognition Video analysis to a Kinesis Data Stream (KDS1) and trigger a Lambda function (LF1) for every event that Rekognition Video outputs.
 
     d. For every known face detected by Rekognition, send the visitor an SMS 5
     message to the phone number on file. The text message should include a
@@ -93,12 +90,12 @@ visitors, as well as adds them to the database for future training.
 
 ### Authorize
 
-    a. Create a second web page (WP2), the “virtual door”, that prompts the user to input the OTP.
-        
-        i. If the OTP is valid, greet the user by name and present a success message. 
-        ii. If the OTP is invalid, present a “permission denied” message.
+a. Create a second web page (WP2), the “virtual door”, that prompts the user to input the OTP.
 
-    b. Note that you will have to build your own API to capture and validate the OTP. Its design and implementation is left up to you.
+    i. If the OTP is valid, greet the user by name and present a success message. 
+    ii. If the OTP is invalid, present a “permission denied” message.
+
+b. Note that you will have to build your own API to capture and validate the OTP. Its design and implementation is left up to you.
        
 
 
