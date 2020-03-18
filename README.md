@@ -29,19 +29,15 @@ visitors, as well as adds them to the database for future training.
 
     a. Create a S3 bucket (B1) to store the photos of the visitors.
 
-    b. Create a DynamoDB table “passcodes” (DB1) that stores temporary
-       access codes to your virtual door and a reference to the visitor it was assigned to.
+    b. Create a DynamoDB table “passcodes” (DB1) that stores temporary access codes to your virtual door and a reference to the visitor it was assigned to.
 
         i. Use the TTL feature of DynamoDB to expire the records after 5 minutes.
 
     c. Create a DynamoDB table “visitors” (DB2) that stores details about the visitors that your Smart Door system is interacting with.
 
-        i. Index each visitor by the FaceId detected by Amazon Rekognition, alongside the name of the visitor and
-           their phone number. When storing a new face, if the FaceId
-           returned by Rekognition already exists in the database, append the
-           new photo to the existing photos array.
-
-           Use the following schema for the JSON object:
+        i. Index each visitor by the FaceId detected by Amazon Rekognition, alongside the name of the visitor and their phone number. When storing a new face, if the FaceId returned by Rekognition already exists in the database, append the new photo to the existing photos array. 
+        
+        Use the following schema for the JSON object:
 ```
 {
   “faceId”: “{UUID}”,
