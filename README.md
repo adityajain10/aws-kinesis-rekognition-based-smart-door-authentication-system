@@ -72,18 +72,9 @@ d. For every known face detected by Rekognition, send the visitor an SMS message
  e. For every unknown face detected by Rekogniton, send an SMS to the “owner” (i.e. yourself or a team member) a photo of the visitor. The text message should also include a link to approve access for the visitor.
         
    i. If clicked, the link should take you to a simple web page (WP1) that collects the name and phone number of the visitor via a web form.
-            
-            * Submitting this form should create a new record in the
-              “visitors” table (DB2), indexed by the FaceId identified by
-               Rekognition. Note that you will have to build your own API to
-               send information from the form to the backend. Its design
-                and implementation is left up to you.
-
-
-            * Generate a OTP as in step (d) above and store it in the “passcodes” table (DB1), with a 5 minute expiration timestamp.
-            
-            * Send the visitor an SMS message to the phone number on
-              file. The text message should include the OTP.
+      * Submitting this form should create a new record in the “visitors” table (DB2), indexed by the FaceId identified by Rekognition.           Note that you will have to build your own API to send information from the form to the backend. Its design and implementation is           left up to you.
+      * Generate a OTP as in step (d) above and store it in the “passcodes” table (DB1), with a 5 minute expiration timestamp.
+      * Send the visitor an SMS message to the phone number on file. The text message should include the OTP.
 
 ### Authorize
 
