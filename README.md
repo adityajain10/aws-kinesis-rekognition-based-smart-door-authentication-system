@@ -14,11 +14,9 @@ them an SMS message with a valid OTP.
 greeting.
 
 ## Mechanism
-At this point you should be able to:
 1. Process streaming video and perform stream analysis to identify faces.
 2. Identify known people and provide them with an automatic access code.
-3. Trigger an identification workflow that allows or denies access to unknown
-visitors, as well as adds them to the database for future training.
+3. Trigger an identification workflow that allows or denies access to unknown visitors, as well as adds them to the database for future training.
 
 ## Architecture
 
