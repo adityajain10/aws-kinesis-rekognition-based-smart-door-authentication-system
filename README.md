@@ -3,11 +3,8 @@
 A Smart Door authentication system that uses Kinesis Video Streams and Amazon Rekognition to build a distributed system that authenticates people and provides them with access to a virtual door.
 
 ## Requirements
-1. For a given visitor, your system should be able to depict their face
-and email you to allow or deny them access.
-2. If allowed access, you should be able to capture their information through a
-hosted web page. You should then send them an SMS message with a valid
-OTP that is only valid for a maximum of 5 minutes.
+1. For a given visitor, your system should be able to depict their face and email you to allow or deny them access.
+2. If allowed access, you should be able to capture their information through a hosted web page. You should then send them an SMS message with a valid OTP that is only valid for a maximum of 5 minutes.
 3. The OTP should be valid only once and guaranteed unique across the different
 visitors.
 4. For a returning visitor (ex. the same TA), your system should automatically send
