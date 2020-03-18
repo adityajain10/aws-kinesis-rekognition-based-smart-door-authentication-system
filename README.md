@@ -58,23 +58,17 @@ c. Create a DynamoDB table “visitors” (DB2) that stores details about the vi
 
 a. Create a Kinesis Video Stream (KVS1), that will be used to capture and stream video for analysis. You can use the built-in video recording feature in the Kinesis console to simulate a real streaming video camera.
 
-b. Subscribe Rekognition Video to the Kinesis Video Stream (KVS1). 4
+b. Subscribe Rekognition Video to the Kinesis Video Stream (KVS1).
 
 c. Output the Rekognition Video analysis to a Kinesis Data Stream (KDS1) and trigger a Lambda function (LF1) for every event that Rekognition Video outputs.
 
-    d. For every known face detected by Rekognition, send the visitor an SMS 5
-    message to the phone number on file. The text message should include a
-    PIN or a One-Time Passcode (OTP) that they can use to open the virtual door.
-
-        i. Store the OTP in the “passcodes” table (DB1), with a 5 minute
-           expiration timestamp.
-
-    e. For every unknown face detected by Rekogniton, send an SMS to the
-    “owner” (i.e. yourself or a team member) a photo of the visitor. The text
-    message should also include a link to approve access for the visitor.
+d. For every known face detected by Rekognition, send the visitor an SMS message to the phone number on file. The text message should include a PIN or a One-Time Passcode (OTP) that they can use to open the virtual door.
+   
+   i. Store the OTP in the “passcodes” table (DB1), with a 5 minute expiration timestamp.
+ 
+ e. For every unknown face detected by Rekogniton, send an SMS to the “owner” (i.e. yourself or a team member) a photo of the visitor. The text message should also include a link to approve access for the visitor.
         
-        i. If clicked, the link should take you to a simple web page (WP1) that
-           collects the name and phone number of the visitor via a web form.
+   i. If clicked, the link should take you to a simple web page (WP1) that collects the name and phone number of the visitor via a web form.
             
             * Submitting this form should create a new record in the
               “visitors” table (DB2), indexed by the FaceId identified by
