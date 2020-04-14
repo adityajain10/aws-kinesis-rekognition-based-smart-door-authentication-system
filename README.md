@@ -71,7 +71,8 @@ d. For every known face detected by Rekognition, send the visitor an SMS message
         
    i. If clicked, the link should take you to a simple web page (WP1) that collects the name and phone number of the visitor via a web form.
    
-      * Submitting this form should create a new record in the “visitors” table (DB2), indexed by the FaceId identified by Rekognition.           Note that you will have to build your own API to send information from the form to the backend.
+      * Submitting this form should create a new record in the “visitors” table (DB2), indexed by the FaceId identified by Rekognition.
+      Note that you will have to build your own API to send information from the form to the backend.
       
       * Generate a OTP as in step (d) above and store it in the “passcodes” table (DB1), with a 5 minute expiration timestamp.
       
