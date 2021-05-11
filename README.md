@@ -40,20 +40,20 @@ c. Create a DynamoDB table “visitors” (DB2) that stores details about the vi
         
    Use the following schema for the JSON object:
    
-```
-{
-  “faceId”: “{UUID}”,
-  “name”: “Jane Doe”,
-  “phoneNumber”: “+12345678901”,
-  “photos”: [
-    {
-      “objectKey”: “my-photo.jpg”,
-      “bucket”: “my-photo-bucket”,
-      “createdTimestamp”: “2018-11-05T12:40:02”
-    }
-  ]
-}
-```
+   ```
+   {
+     “faceId”: “{UUID}”,
+     “name”: “Jane Doe”,
+     “phoneNumber”: “+12345678901”,
+     “photos”: [
+       {
+         “objectKey”: “my-photo.jpg”,
+         “bucket”: “my-photo-bucket”,
+         “createdTimestamp”: “2018-11-05T12:40:02”
+       }
+     ]
+   }
+   ```
 
 ### Analyze
 
@@ -87,5 +87,3 @@ a. Create a second web page (WP2), the “virtual door”, that prompts the user
 
 b. Note that you will have to build your own API to capture and validate the OTP. Its design and implementation is left up to you.
        
-
-
